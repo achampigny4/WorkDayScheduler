@@ -29,10 +29,14 @@ WHEN I click the save button for that timeblock
 THEN the text for that event is saved in local storage
 WHEN I refresh the page
 THEN the saved events persist
-
-## link to my app:
-
-```
+<br><br>
+Link to app:
+<br><br>
 https://achampigny4.github.io/WorkDayScheduler/
 
 <img src ="" alt="screenshot of scheduler">
+
+references:
+<br>
+<br>
+https://www.webfx.com/blog/web-design/javascript-dates-moment-js/
