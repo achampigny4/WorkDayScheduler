@@ -6,13 +6,6 @@ $(function () {
     let displayMoment = document.getElementById('currentDay');
     displayMoment.textContent = now;
 
-    ///////////////////////////////////////////////
-    //what time it is ... goal to display time rows and to apply past present future colors
-    let time = moment().format('hh:mm A');
-    // console.log(time);
-    // let timeEl = document.getElementById('hour');
-    // timeEl.textContent = time;
-
     /////////////////task col////////////////////////////////
     //task empty array
     let tasks = [];
@@ -20,9 +13,9 @@ $(function () {
     init();
     // //function handles event where save button is clicked it displays the task in the addText col
     // //and saves task to local storage
-    $('addTask').on('click', function (event) {
+    $('addTaskEl').on('click', function (event) {
         event.preventDefault();
-        let task = $('addTask').val().trim();
+        let task = $('addTaskEl').val().trim();
         tasks.push(task);
         storeTasks();
         displayTask();
@@ -30,18 +23,18 @@ $(function () {
 
     // //displays task in add task col
     function displayTask() {
-        $('addTask').empty();
-        let taskEl = $('addTask').textContent(task).append(taskEl);
+        $('addTaskEl').empty();
+        let taskEl = $('addTaskEl').textContent(task).append(taskEl);
     };
 
     // save btn clicked store task
-    $('.saveBtn').on('click', function (event) {
-        event.storeTasks();
+    $('saveBtnEl').on('click', function () { //////not saving to local storage
+        storeTasks();
     });
 
     //save task to local storage
     function storeTasks() {
-        localStorage.setItem('task', JSON.stringify(task));
+        localStorage.setItem('task', JSON.stringify(tasks));
     };
 
     function init() {
@@ -49,48 +42,39 @@ $(function () {
         // Parsing the JSON string to an object
         var storedTasks = JSON.parse(localStorage.getItem('task'));
         // If tasks were retrieved from localStorage
-        if (storedTodos !== null) {
+        if (storedTasks !== null) {
             tasks = storedTasks;
         };
+    };
 
-        ///////////////////////////////////////////////////////////
-        // setting time of hour class
-        let timeEl = document.createAttribute('time');
-        timeEl.innerText = time;
+    ///////////////////////////////////////////////////////////
+    // setting time of hour class
+    ///////////////////////////////////////////////
+    //get a moment and set a moment //could build with + hour off of base hour of 9am
+    //what time it is ... goal to display time rows and to apply past present future colors
+    let hour = moment().format('hh:mm A');
+    // console.log(time);
+    let timeEl = document.getElementById('hourEl');
+    timeEl.textContent = hour;
 
-        // time = moment('LT')
-        // if (moment('LT').isSame('LT').textContent.hour
+    // if (moment('LT').isSame('LT').textContent.hour
+    // function isWithin(timeRange, when) {
+    //     return (when.within(timeRange).format('HH:mm Z'));
+    // }
+    // check if now is within time range 
+    // let when = moment('LT');
+    // console.log(isWithin(timeRange, when));
 
-        // const startTime = moment('09:00 +LT', 'HH:mm Z'); // 9:00 am
-        // const endTime = moment('17:00 +LT', 'HH:mm Z'); // 5:00 pm
-        // console.log(startTime , endTime);
-        // let TimeRange = 
+    ////////////////////display rows and col /////////////////////////
+    //add more for 9-5pm
 
-        // add plugin to use range  
-        // const moment = extendMoment(Moment);
-        // const startTime = moment('09:00 +LT', 'HH:mm Z'); // 9:00 am
-        // const endTime = moment('17:00 +LT', 'HH:mm Z'); // 5:00 pm
-        // let timeRange = moment.range(startTime, endTime);
-        // console.log(TimeRanges);
-        // function isWithin(timeRange, when) {
-        //     return (when.within(timeRange).format('HH:mm Z'));
-        // }
-        // check if now is within time range 
-        // let when = moment('LT');
-        // console.log(isWithin(timeRange, when));
+    ///////////////////display colors///////////////////
+    //is before and after method from moment
+    // if (moment('LT').isSame('LT').textContent.hour
+    // let hourEl = $('hour').css('display', 'present')
+    //     if (time == moment());
+    // console.log(hourEl)
+    //if time <= moment().css('display', 'future');
+    // if time >= moment().css('display', 'past');
 
-        ////////////////////display rows and col /////////////////////////
-
-        ///////////////////display colors///////////////////
-        //is before and after method from moment
-        // if (moment('LT').isSame('LT').textContent.hour
-        // let hourEl = $('hour').css('display', 'present')
-        //     if (time == moment());
-        // console.log(hourEl)
-        //if time <= moment().css('display', 'future');
-        // if time >= moment().css('display', 'past');
-
-        //get a moment and set a moment //could build with + hour off of base hour of 9am
-        //local storage
-
-    });
+});
