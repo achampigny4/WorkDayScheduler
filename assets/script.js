@@ -6,6 +6,7 @@ $(function () {
     let displayMoment = document.getElementById('currentDay');
     displayMoment.textContent = now;
 
+    // moment(date).hour
     /////////////////task col- local storage////////////////////////////////
 
     //task empty array
@@ -30,19 +31,18 @@ $(function () {
     };
 
     // save btn clicked store task
-    $('.saveBtn').on('click', function () { //////not saving to local storage?
+    $('.saveBtn').on('click', function () { 
         let taskObj = {};
-        $('.task-input').each(function(i, inputEl){
-            let input = $(inputEl);
-            console.log(i);
-            console.log(input.attr('data-time'));
-        taskObj.i = $(".task-input").val().trim();
+        $('.task-input').each(function (tasks, inputEl) {
+            // console.log(tasks);
+            console.log(inputEl);
+            taskObj[tasks] = $(inputEl).val().trim();
         });
         storeTasks(taskObj);
     });
 
 
-    // save task to local storage (setItem)
+    // // save task to local storage (setItem)
     function storeTasks(tasks) {
         window.localStorage.setItem('tasks', JSON.stringify(tasks));
     };
@@ -50,9 +50,12 @@ $(function () {
     function init() {
         // Get stored tasks from localStorage (getItem)
         // Parsing the JSON string to an object
-        var storedTasks = JSON.parse(localStorage.getItem('tasks'));
+        let storedTasks = JSON.parse(localStorage.getItem('tasks'));
         // If no tasks were retrieved from localStorage
         if (storedTasks !== null) {
+            for (let i = 0; i < 8; i ++) {
+                $("#inputEl"+i).text(storedTasks);
+            }
             tasks = storedTasks;
         };
     };
