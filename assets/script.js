@@ -1,80 +1,68 @@
 $(function () {
+
     //current day and time
     const now = moment().format('LLLL');
-    // console.log(now);
     //display current day and time
     let displayMoment = document.getElementById('currentDay');
     displayMoment.textContent = now;
 
-    /////////////////task col////////////////////////////////
+    /////////////////task col- local storage////////////////////////////////
+
     //task empty array
     let tasks = [];
+
     //get local storage when page is loaded
     init();
+
     // //function handles event where save button is clicked it displays the task in the addText col
     // //and saves task to local storage
-    $('addTaskEl').on('click', function (event) {
-        event.preventDefault();
-        let task = $('addTaskEl').val().trim();
-        tasks.push(task);
-        storeTasks();
-        displayTask();
+    $('#addTaskEl').on('click', function (event) {
+        event.preventDefault(); //display input where it is and not sumbit to somewhere else?
+        let taskInput = $('#addTaskEl').val().trim(); //input
+        displayTask(taskInput); //display input
+        // console.log(taskInput);
     });
 
-    // //displays task in add task col
-    function displayTask() {
+    //displays task in add task col
+    function displayTask(taskInput) {
         $('addTaskEl').empty();
-        let taskEl = $('addTaskEl').textContent(task).append(taskEl);
+        $('addTaskEl').text(taskInput).append(tasks);
     };
 
     // save btn clicked store task
-    $('saveBtnEl').on('click', function () { //////not saving to local storage
-        storeTasks();
+    $('.saveBtn').on('click', function () { //////not saving to local storage?
+        let taskObj = {};
+        $('.task-input').each(function(i, inputEl){
+            let input = $(inputEl);
+            console.log(i);
+            console.log(input.attr('data-time'));
+        taskObj.i = $(".task-input").val().trim();
+        });
+        storeTasks(taskObj);
     });
 
-    //save task to local storage
-    function storeTasks() {
-        localStorage.setItem('task', JSON.stringify(tasks));
+
+    // save task to local storage (setItem)
+    function storeTasks(tasks) {
+        window.localStorage.setItem('tasks', JSON.stringify(tasks));
     };
 
     function init() {
-        // Get stored tasks from localStorage
+        // Get stored tasks from localStorage (getItem)
         // Parsing the JSON string to an object
-        var storedTasks = JSON.parse(localStorage.getItem('task'));
-        // If tasks were retrieved from localStorage
+        var storedTasks = JSON.parse(localStorage.getItem('tasks'));
+        // If no tasks were retrieved from localStorage
         if (storedTasks !== null) {
             tasks = storedTasks;
         };
     };
 
-    ///////////////////////////////////////////////////////////
-    // setting time of hour class
-    ///////////////////////////////////////////////
-    //get a moment and set a moment //could build with + hour off of base hour of 9am
-    //what time it is ... goal to display time rows and to apply past present future colors
-    let hour = moment().format('hh:mm A');
-    // console.log(time);
-    let timeEl = document.getElementById('hourEl');
-    timeEl.textContent = hour;
 
-    // if (moment('LT').isSame('LT').textContent.hour
-    // function isWithin(timeRange, when) {
-    //     return (when.within(timeRange).format('HH:mm Z'));
-    // }
-    // check if now is within time range 
-    // let when = moment('LT');
-    // console.log(isWithin(timeRange, when));
 
-    ////////////////////display rows and col /////////////////////////
-    //add more for 9-5pm
+    ///////////////////task color//////////////////
 
-    ///////////////////display colors///////////////////
-    //is before and after method from moment
-    // if (moment('LT').isSame('LT').textContent.hour
-    // let hourEl = $('hour').css('display', 'present')
-    //     if (time == moment());
-    // console.log(hourEl)
-    //if time <= moment().css('display', 'future');
-    // if time >= moment().css('display', 'past');
 
+
+
+    //end
 });
