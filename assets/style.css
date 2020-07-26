@@ -69,4 +69,17 @@ body {
     font-size: 20px;
     transition: all .3s ease-in-out;
   }
+
+  .clearBtn {
+    border-left: 1px solid black;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #0660d5;
+    color: white;
+  }
+  
+  .clearBtn i:hover {
+    font-size: 20px;
+    transition: all .3s ease-in-out;
+  }
   
