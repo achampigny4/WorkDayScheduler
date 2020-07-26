@@ -24,17 +24,18 @@ $(function () {
 
     // // save task to local storage (setItem)
     function storeTasks(tasks) {
-        window.localStorage.setItem('tasks', JSON.stringify(tasks));
+        localStorage.setItem('tasks', JSON.stringify(tasks));
     };
 
     function init() {
         // Get stored tasks from localStorage (getItem)
         // Parsing the JSON string to an object
         let storedTasks = JSON.parse(localStorage.getItem('tasks'));
+        // console.log(storedTasks);
         // If no tasks were retrieved from localStorage
         if (storedTasks !== null) {
             for (let i = 0; i < 10; i++) {
-                $('#addTaskEl' + (i + 9)).text(storedTasks[i]);
+                $('#addTaskEl' + (i + 9)).val(storedTasks[i]);
             };
         };
     };
