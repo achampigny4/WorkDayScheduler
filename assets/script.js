@@ -6,7 +6,27 @@ $(function () {
     let displayMoment = document.getElementById('currentDay');
     displayMoment.innerText = now;
 
-    ////task col- local storage////////////////////////////////
+    ///////////////////task color//////////////////
+    // function that changes task color css based on the time it is
+    function taskColor() {
+        $('.task-input').each(function () {
+            let current = parseInt(moment().hour());
+            let time = parseInt($(this).data("time"));
+            // console.log(time, current);
+            if (time < current) {
+                $(this).addClass('past');
+            } else if (time === current) {
+                $(this).remove('past');
+                $(this).addClass('present');
+            } else {
+                $(this).remove('past');
+                $(this).remove('present');
+                $(this).addClass('future');
+            };
+        });
+    };
+
+    ///////////////////task col- local storage////////////////////////////////
     // this is getting stored or empty array
     let taskObj = [];
 
@@ -38,6 +58,8 @@ $(function () {
     };
     //get local storage when page is loaded
     init();
+    // function taskColor when page loads
+    taskColor();
 
     //clear button
     // $('#clearBtn').on('click', function () {
@@ -51,33 +73,7 @@ $(function () {
     //     localStorage.clear('tasks', JSON.stringify(tasks));
     // };
 
-    ///////////////////task color//////////////////
-    //get a moment and set a moment //could build with + hour off of base hour of 9am
-    // let hour = moment().format('hh:mm A');
 
-    // console.log(moment().hour());
-
-    function taskColor() {
-        $('.task-input').each(function () {
-            let current = parseInt(moment().hour());
-            let time = parseInt($(this).data("time"));
-            console.log(time, current);
-            if (time < current) {
-                $(this).addClass('past');
-            } else if (time === current) {
-                $(this).remove('past');
-                $(this).addClass('present');
-                console.log('#time');
-            } else (time > moment().hour()); {
-                $(this).remove('past');
-                $(this).remove('present');
-                $(this).addClass('future');
-            };
-        });
-    };
-
-    // function taskColor run
-    taskColor();
 
 
 
