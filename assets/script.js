@@ -4,7 +4,7 @@ $(function () {
     const now = moment().format('LLLL');
     //display current day and time
     let displayMoment = document.getElementById('currentDay');
-    displayMoment.textContent = now;
+    displayMoment.innerText = now;
 
     ////task col- local storage////////////////////////////////
     // this is getting stored or empty array
@@ -36,7 +36,6 @@ $(function () {
             storedTasks = taskObj;
         };
     };
-    // javascript runs top to bottom
     //get local storage when page is loaded
     init();
 
@@ -60,49 +59,24 @@ $(function () {
 
     function taskColor() {
         $('.task-input').each(function () {
-            if (('#time') == moment().hour()); {
-                $(this).addClass('present');
-                // console.log('#time');
-            };
-            if (('#time') < moment().hour()); {
+            let current = parseInt(moment().hour());
+            let time = parseInt($(this).data("time"));
+            console.log(time, current);
+            if (time < current) {
                 $(this).addClass('past');
-            };
-            if (('.hour') > moment().hour()); {
+            } else if (time === current) {
+                $(this).remove('past');
+                $(this).addClass('present');
+                console.log('#time');
+            } else (time > moment().hour()); {
+                $(this).remove('past');
+                $(this).remove('present');
                 $(this).addClass('future');
             };
         });
     };
 
-    // function taskColor() {
-    //     var time = $(".hour").val();
-    //     $('.task-input').each(function () {
-    //         if (time == moment().hour()); {
-    //             $(this).addClass('present');
-    //             // console.log(time);
-    //         };
-    //         if (('#time') < moment().hour()); {
-    //             $(this).addClass('past');
-    //         };
-    //         if (('.hour') > moment().hour()); {
-    //             $(this).addClass('future');
-    //         };
-    //     });
-    // };
-
-    // function taskColor() {
-    //     if ($(data) == moment().hour())
-    //         $('.task-input').addClass('display, present');
-    //     console.log(data);
-    // };
-
-    // function taskColor() {
-    //     $('.hour').each(function () {
-    //         if ($(this).html) == moment().hour())
-    //             $('.task-input').addClass('display, present');
-    //         // console.log();
-    //     });
-    // };
-
+    // function taskColor run
     taskColor();
 
 
