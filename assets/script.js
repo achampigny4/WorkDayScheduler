@@ -7,40 +7,20 @@ $(function () {
     displayMoment.textContent = now;
 
     // moment(date).hour
-    /////////////////task col- local storage////////////////////////////////
 
-    //task empty array
-    let tasks = [];
-
-    //get local storage when page is loaded
-    init();
-
-    // //function handles event where save button is clicked it displays the task in the addText col
-    // //and saves task to local storage
-    $('#addTaskEl').on('click', function (event) {
-        event.preventDefault(); //display input where it is and not sumbit to somewhere else?
-        let taskInput = $('#addTaskEl').val().trim(); //input
-        displayTask(taskInput); //display input
-        // console.log(taskInput);
-    });
-
-    //displays task in add task col
-    function displayTask(taskInput) {
-        $('addTaskEl').empty();
-        $('addTaskEl').text(taskInput).append(tasks);
-    };
+    ////task col- local storage////
+    // this is getting stored or empty array
+    let taskObj = [];
+    // let taskObj = JSON.parse(localStorage.getItem('tasks')) || [];
+    // console.log(taskObj);
 
     // save btn clicked store task
-    $('.saveBtn').on('click', function () { 
-        let taskObj = {};
+    $('.saveBtn').on('click', function () {
         $('.task-input').each(function (tasks, inputEl) {
-            // console.log(tasks);
-            console.log(inputEl);
             taskObj[tasks] = $(inputEl).val().trim();
         });
         storeTasks(taskObj);
     });
-
 
     // // save task to local storage (setItem)
     function storeTasks(tasks) {
@@ -53,14 +33,14 @@ $(function () {
         let storedTasks = JSON.parse(localStorage.getItem('tasks'));
         // If no tasks were retrieved from localStorage
         if (storedTasks !== null) {
-            for (let i = 0; i < 8; i ++) {
-                $("#inputEl"+i).text(storedTasks);
-            }
-            tasks = storedTasks;
+            for (let i = 0; i < 10; i++) {
+                $('#addTaskEl' + (i + 9)).text(storedTasks[i]);
+            };
         };
     };
-
-
+    // javascript runs top to bottom
+    //get local storage when page is loaded
+    init();
 
     ///////////////////task color//////////////////
 
