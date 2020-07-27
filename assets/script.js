@@ -26,6 +26,9 @@ $(function () {
         });
     };
 
+    // function taskColor when page loads
+    taskColor();
+
     ///////////////////task col- local storage////////////////////////////////
     // this is getting stored or empty array
     let taskObj = [];
@@ -58,25 +61,6 @@ $(function () {
     };
     //get local storage when page is loaded
     init();
-    // function taskColor when page loads
-    taskColor();
-
-    //clear button
-    // $('#clearBtn').on('click', function () {
-    //     $('.task-input').each(function (tasks, inputEl) {
-    //         taskObj[tasks] = $(inputEl).val();
-    //     });
-    //     clearTasks();
-    // });
-
-    // function clearTasks(tasks) {
-    //     localStorage.clear('tasks', JSON.stringify(tasks));
-    // };
-
-
-
-
-
 
     //end
 });
